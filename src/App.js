@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import Detail from "./pages/Detail";
 import StaticContext from "./context/StaticContext";
+import { GifsContextProvider } from "./context/GifsContext";
 
 export default function App() {
   return (
@@ -16,9 +17,11 @@ export default function App() {
           <Link to="/">
             <img className="App-logo" alt="Giffy logo" src={logoGiffy} />
           </Link>
-          <Route path="/" component={Home} />
-          <Route path="/search/:keyword" component={SearchResults} />
-          <Route path="/gif/:id" component={Detail} />
+          <GifsContextProvider>
+            <Route path="/" component={Home} />
+            <Route path="/search/:keyword" component={SearchResults} />
+            <Route path="/gif/:id" component={Detail} />
+          </GifsContextProvider>
         </section>
       </div>
     </StaticContext.Provider>

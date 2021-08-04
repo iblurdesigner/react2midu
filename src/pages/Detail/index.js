@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import StaticContext from "../../context/StaticContext";
+import Gif from "../../components/Gif";
+import useGlobalGifs from "../../hook/useGlobalGifs";
 
 export default function Detail({ params }) {
-  const context = useContext(StaticContext);
-  console.log(context);
+  const gifs = useGlobalGifs();
 
-  console.log(params.id);
-  return <h1>GIF con id {params.id}</h1>;
+  const gif = gifs.find((singleGif) => singleGif.id === params.id);
+
+  console.log(gif);
+
+  return <Gif {...gif} />;
 }
