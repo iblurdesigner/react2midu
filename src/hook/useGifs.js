@@ -2,8 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import getGifs from "../services/getGifs";
 import GifsContext from "../context/GifsContext";
 
+const INITIAL_PAGE = 0;
+
 export default function useGifs({ keyword } = { keyword: null }) {
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(INITIAL_PAGE);
   const { gifs, setGifs } = useContext(GifsContext);
 
   useEffect(
