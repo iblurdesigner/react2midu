@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import "./App.css";
 import { Link, Route } from "wouter";
 import logoGiffy from "./logo_giffy.png";
@@ -7,27 +6,24 @@ import SearchResults from "./pages/SearchResults";
 import Detail from "./pages/Detail";
 import StaticContext from "./context/StaticContext";
 import { GifsContextProvider } from "./context/GifsContext";
-import Spinner from "components/Spinner";
 
 export default function App() {
   return (
-    <Suspense fallback={<Spinner />}>
-      <StaticContext.Provider
-        value={{ name: "davidflores", suscribeteAlCanal: true }}
-      >
-        <div className="App">
-          <section className="App-content">
-            <Link to="/">
-              <img className="App-logo" alt="Giffy logo" src={logoGiffy} />
-            </Link>
-            <GifsContextProvider>
-              <Route path="/" component={Home} />
-              <Route path="/search/:keyword" component={SearchResults} />
-              <Route path="/gif/:id" component={Detail} />
-            </GifsContextProvider>
-          </section>
-        </div>
-      </StaticContext.Provider>
-    </Suspense>
+    <StaticContext.Provider
+      value={{ name: "davidflores", suscribeteAlCanal: true }}
+    >
+      <div className="App">
+        <section className="App-content">
+          <Link to="/">
+            <img className="App-logo" alt="Giffy logo" src={logoGiffy} />
+          </Link>
+          <GifsContextProvider>
+            <Route path="/" component={Home} />
+            <Route path="/search/:keyword" component={SearchResults} />
+            <Route path="/gif/:id" component={Detail} />
+          </GifsContextProvider>
+        </section>
+      </div>
+    </StaticContext.Provider>
   );
 }
