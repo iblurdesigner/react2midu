@@ -1,37 +1,27 @@
-import { useState } from "react";
+import { useCallback } from "react";
 import { useLocation } from "wouter";
 import ListOfGifs from "components/ListOfGifs";
 import useGifs from "hook/useGifs";
 import TrendingSearches from "components/TrendingSearches";
+import SearchForm from "components/SearchForm";
 
 //const POPULAR_GIFS = ["Matrix", "Venezuela", "Chile", "Colombia", "Ecuador"];
 
 export default function Home() {
-  const [keyword, setKeyword] = useState("");
   const [path, pushLocation] = useLocation();
   const { loading, gifs } = useGifs();
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    // navega a otra ruta
-    pushLocation(`/search/${keyword}`);
-  };
-
-  const handleChange = (ev) => {
-    setKeyword(ev.target.value);
-  };
+  const handleSubmit = useCallback(
+    ({ keyword }) => {
+      // navega a otra ruta
+      pushLocation(`/search/${keyword}`);
+    },
+    [pushLocation]
+  );
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <button>Buscar</button>
-        <input
-          placeholder="Search a gif here..."
-          type="text"
-          value={keyword}
-          onChange={handleChange}
-        />
-      </form>
+      <SearchForm onSubmit={handleSubmit} />
       <div className="App-main">
         <div className="App-results">
           <h3 className="App-title">Última búsqueda</h3>

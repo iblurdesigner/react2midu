@@ -1,0 +1,29 @@
+import React, { useState } from "react";
+
+function SearchForm({ onSubmit }) {
+  const [keyword, setKeyword] = useState("");
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    // navega a otra ruta
+    onSubmit({ keyword });
+  };
+
+  const handleChange = (ev) => {
+    setKeyword(ev.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <button>Buscar</button>
+      <input
+        placeholder="Search a gif here..."
+        type="text"
+        value={keyword}
+        onChange={handleChange}
+      />
+    </form>
+  );
+}
+
+export default React.memo(SearchForm);
