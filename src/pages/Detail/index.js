@@ -1,12 +1,19 @@
 import Gif from "components/Gif";
-import useGlobalGifs from "hook/useGlobalGifs";
+import Spinner from "components/Spinner";
+import useSingleGif from "hook/useSingleGif";
+import { Redirect } from "wouter";
 
 export default function Detail({ params }) {
-  const gifs = useGlobalGifs();
+  const { gif, isLoading, isError } = useSingleGif({ id: params.id });
 
-  const gif = gifs.find((singleGif) => singleGif.id === params.id);
+  if (isLoading) return <Spinner />;
+  if (isError) return <Redirect to="404" />;
+  if (!gif) return null;
 
-  console.log(gif);
-
-  return <Gif {...gif} />;
+  return (
+    <>
+      <h3 className="App-title">{gif.titke}</h3>
+      <Gif {...gif} />
+    </>
+  );
 }
