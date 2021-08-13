@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 //const POPULAR_GIFS = ["Matrix", "Venezuela", "Chile", "Colombia", "Ecuador"];
 
 export default function Home() {
-  const [_, pushLocation] = useLocation();
+  const [[], pushLocation] = useLocation();
   const { gifs } = useGifs();
 
   const handleSubmitSearchForm = useCallback(
